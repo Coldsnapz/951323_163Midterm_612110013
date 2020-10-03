@@ -24,7 +24,7 @@ public class MainMenuButtons : MonoBehaviour, IPointerEnterHandler
     }
     public void LoadCredit()
     {
-        SceneManager.LoadScene("SceneMainMenu");
+        SceneManager.LoadScene("SceneCredit");
     }
     public void ExitGame()
     {

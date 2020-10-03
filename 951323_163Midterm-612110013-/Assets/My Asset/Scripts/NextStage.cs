@@ -10,7 +10,7 @@ public class NextStage : MonoBehaviour
     [SerializeField] Text _timeCounterHolder;
     [SerializeField] string _nextStage;
     private bool loseConfirm;
-    void Awake()
+    void Start()
     {
         _timeCounterHolder.text = Mathf.Round(_timeLeft).ToString();
     }
@@ -23,10 +23,12 @@ public class NextStage : MonoBehaviour
         }
         if (_timeLeft <= 0)
         {
-            if (!loseConfirm){
-            _timeCounterHolder.text = Mathf.Round(_timeLeft).ToString();
-            SceneManager.LoadScene("SceneLosing", LoadSceneMode.Additive);
-            loseConfirm = true;
+            _timeLeft = 0;
+            if (!loseConfirm)
+            {
+                _timeCounterHolder.text = Mathf.Round(_timeLeft).ToString();
+                SceneManager.LoadScene("SceneLosing", LoadSceneMode.Additive);
+                loseConfirm = true;
             }
         }
     }
@@ -34,6 +36,7 @@ public class NextStage : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            Singleton_ScoreBoard.Instance.Score += (int)((_timeLeft)*1000);
             Singleton_ScoreBoard.Instance.Winning++;
             SceneManager.LoadScene(_nextStage);
         }
